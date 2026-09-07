@@ -1,0 +1,327 @@
+---
+const stores = [
+  {
+    name: "GAME",
+    logo: "/game.png",
+    url: "https://www.game.es/accesorios/volante/pc-gaming/revosim-by-nacon-pack-rs-pure-volante-base-dd-9nm-pedalera-volante-gaming/264071",
+  },
+  {
+    name: "MediaMarkt",
+    logo: "/mediamarkt.png",
+    url: "https://www.mediamarkt.es/es/product/_volante-nacon-na028690-pedales-base-pc-negro-1669500.html",
+  },
+];
+---
+
+<!doctype html>
+<html lang="es">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width" />
+    <meta
+      name="description"
+      content="REVOSIM, el ecosistema de simracing de NACON."
+    />
+    <title>REVOSIM by NACON</title>
+  </head>
+  <body>
+    <main>
+      <section class="screen hero" id="inicio">
+        <img src="/portada.png" alt="REVOSIM by NACON" fetchpriority="high" />
+        <div class="shade"></div>
+        <div class="hero-actions">
+          <a class="button" href="#revosim">¿QUÉ ES REVOSIM?</a>
+          <a class="button" href="#comprar">COMPRAR AHORA</a>
+        </div>
+      </section>
+
+      <section class="screen text-screen" id="revosim">
+        <div class="content narrow">
+          <p class="kicker">REVOSIM BY NACON</p>
+          <h1>¿QUÉ ES REVOSIM?</h1>
+          <p class="description">
+            REVOSIM es el ecosistema de simracing de NACON, diseñado para ofrecer una
+            experiencia de conducción inmersiva, precisa y evolutiva.
+          </p>
+          <div class="points">
+            <p><strong>Rendimiento</strong> Tecnología orientada a precisión y respuesta inmediata.</p>
+            <p><strong>Inmersión</strong> Sensaciones realistas en cada curva.</p>
+            <p><strong>Evolución</strong> Un ecosistema modular preparado para crecer contigo.</p>
+          </div>
+        </div>
+      </section>
+
+      <section class="screen media-screen">
+        <video autoplay muted loop playsinline preload="metadata" poster="/portada.png">
+          <source src="/revosim-trailer.mp4" type="video/mp4" />
+        </video>
+        <button class="sound" type="button" aria-label="Activar sonido">SONIDO</button>
+      </section>
+
+      <section class="screen text-screen">
+        <div class="content narrow">
+          <p class="kicker">LA EXPERIENCIA PREMIUM</p>
+          <h2>REVOSIM<br />PACK RS PURE</h2>
+          <p class="description">
+            El kit definitivo para llevar tu simracing al nivel profesional con máxima
+            precisión y realismo.
+          </p>
+          <div class="points two-columns">
+            <p><strong>Base Direct Drive 9 Nm</strong> Force feedback potente para sentir cada detalle.</p>
+            <p><strong>Pedalera Load Cell</strong> Frenado progresivo basado en presión.</p>
+            <p><strong>Volante GT de 30 cm</strong> 12 botones y levas metálicas.</p>
+            <p><strong>App y ecosistema</strong> Ajustes en tiempo real desde tu móvil.</p>
+          </div>
+          <a class="button" href="#comprar">COMPRAR AHORA</a>
+        </div>
+      </section>
+
+      <section class="screen media-screen">
+        <video autoplay muted loop playsinline preload="metadata" poster="/portada.png">
+          <source src="/aston-martin.mp4" type="video/mp4" />
+        </video>
+        <div class="shade"></div>
+        <div class="content video-title">
+          <p class="kicker">EDICIÓN OFICIAL ASTON MARTIN</p>
+          <h2>LLEVA LA F1<br />A TU SETUP</h2>
+          <p class="description">
+            Precisión y control con un volante diseñado para llevar la competición a tu simulador.
+          </p>
+        </div>
+        <button class="sound" type="button" aria-label="Activar sonido">SONIDO</button>
+      </section>
+
+      <section class="screen buy" id="comprar">
+        <div class="content narrow">
+          <p class="kicker">REVOSIM - PACK RS PURE</p>
+          <h2>COMPRA AHORA</h2>
+          <p class="description">Ya disponible en:</p>
+          <div class="stores">
+            {stores.map((store) => (
+              <a href={store.url} target="_blank" rel="noreferrer" aria-label={`Comprar en ${store.name}`}>
+                <img src={store.logo} alt={store.name} />
+              </a>
+            ))}
+          </div>
+        </div>
+        <footer>
+          <span>Desarrollado por SITELICON ECOMMERCE SERVICES 2026</span>
+        </footer>
+      </section>
+    </main>
+
+    <script>
+      document.querySelectorAll(".sound").forEach((button) => {
+        button.addEventListener("click", () => {
+          const video = button.closest("section")?.querySelector("video");
+          if (!(video instanceof HTMLVideoElement)) return;
+
+          video.muted = !video.muted;
+          button.textContent = video.muted ? "SONIDO" : "SILENCIAR";
+        });
+      });
+    </script>
+  </body>
+</html>
+
+<style is:global>
+  :root {
+    --green: #d8f238;
+    --white: #f5f5f2;
+    --gray: #b3b3ad;
+  }
+
+  * { box-sizing: border-box; }
+  html { scroll-behavior: smooth; }
+  body {
+    margin: 0;
+    overflow: hidden;
+    background: #000;
+    color: var(--white);
+    font-family: Arial, Helvetica, sans-serif;
+  }
+  main {
+    width: 100%;
+    height: 100svh;
+    overflow-y: auto;
+    overflow-x: hidden;
+    scroll-behavior: smooth;
+    scroll-snap-type: y mandatory;
+  }
+  .screen {
+    position: relative;
+    display: flex;
+    min-height: 100svh;
+    align-items: center;
+    justify-content: center;
+    overflow: hidden;
+    scroll-snap-align: start;
+    scroll-snap-stop: always;
+    text-align: center;
+  }
+  .content { position: relative; z-index: 2; width: min(90%, 1100px); }
+  .narrow { width: min(88%, 850px); }
+  .hero > img,
+  .media-screen video {
+    position: absolute;
+    inset: 0;
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+  }
+  .shade {
+    position: absolute;
+    inset: 0;
+    background: linear-gradient(0deg, rgba(0, 0, 0, .72), transparent 55%);
+  }
+  .hero-actions {
+    position: absolute;
+    z-index: 2;
+    bottom: 6vh;
+    left: 0;
+    width: 100%;
+    height: 46px;
+  }
+  .hero-actions .button {
+    position: absolute;
+    top: 0;
+  }
+  .hero-actions .button:first-child {
+    left: 5vw;
+  }
+  .hero-actions .button:last-child {
+    left: 50%;
+    transform: translateX(-50%);
+  }
+  .text-screen { padding: 80px 20px; background: #050505; }
+  .text-screen:nth-of-type(4) { background: linear-gradient(135deg, #11130d, #030403); }
+  .kicker {
+    margin: 0 0 18px;
+    color: var(--green);
+    font-size: .72rem;
+    font-weight: 700;
+    letter-spacing: .2em;
+  }
+  h1, h2 {
+    margin: 0 0 28px;
+    font-size: clamp(3rem, 7vw, 6.5rem);
+    line-height: .9;
+    letter-spacing: -.04em;
+  }
+  .description {
+    max-width: 720px;
+    margin: 0 auto 36px;
+    color: #d2d2cd;
+    font-size: clamp(1rem, 1.5vw, 1.2rem);
+    line-height: 1.65;
+  }
+  .points {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 1px;
+    margin: 45px 0;
+    background: #333;
+    border: 1px solid #333;
+  }
+  .points p {
+    margin: 0;
+    padding: 26px 20px;
+    background: #090909;
+    color: var(--gray);
+    font-size: .86rem;
+    line-height: 1.5;
+  }
+  .points strong { display: block; margin-bottom: 8px; color: white; text-transform: uppercase; }
+  .points.two-columns { grid-template-columns: 1fr 1fr; }
+  .button {
+    display: inline-block;
+    padding: 14px 42px;
+    border: 2px solid white;
+    color: white;
+    font-size: .76rem;
+    font-weight: 700;
+    letter-spacing: .12em;
+    text-decoration: none;
+    transition: background-color .2s ease, color .2s ease, box-shadow .2s ease, filter .1s ease;
+  }
+  .button:hover {
+    background: white;
+    color: black;
+    box-shadow: 0 0 24px rgba(255, 255, 255, .22);
+  }
+  .button:active { filter: brightness(.7); }
+  .sound {
+    position: absolute;
+    z-index: 3;
+    right: 28px;
+    bottom: 28px;
+    padding: 10px 14px;
+    border: 1px solid white;
+    background: rgba(0, 0, 0, .35);
+    color: white;
+    font-size: .65rem;
+    letter-spacing: .12em;
+    cursor: pointer;
+  }
+  .video-title { text-align: left; margin-right: auto; margin-left: 6vw; }
+  .video-title .description { max-width: 500px; margin-left: 0; }
+  .buy { flex-direction: column; background: #080808; }
+  .stores { display: flex; justify-content: center; gap: 18px; }
+  .stores a {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    min-width: 220px;
+    min-height: 105px;
+    padding: 24px 34px;
+    border: 1px solid #777;
+    color: white;
+    font-size: 1.3rem;
+    font-weight: 700;
+    text-decoration: none;
+  }
+  .stores a:hover { border-color: var(--green); color: var(--green); }
+  .stores img { width: 180px; max-height: 58px; object-fit: contain; }
+  .stores a:last-child img { transform: translateY(-8px); }
+  footer { position: absolute; bottom: 28px; display: flex; flex-direction: column; gap: 8px; color: #6f6f6b; font-size: .65rem; letter-spacing: .12em; }
+
+  @media (max-width: 700px) {
+    body { overflow: auto; }
+    main { height: auto; scroll-snap-type: none; }
+    .screen { min-height: 100svh; }
+    .hero > img { object-position: 58% center; }
+    .hero-actions {
+      top: auto;
+      right: 20px;
+      bottom: 5vh;
+      left: 20px;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: 14px;
+      width: auto;
+      height: auto;
+      transform: none;
+    }
+    .hero-actions .button {
+      position: static;
+      width: min(100%, 310px);
+      transform: none;
+    }
+    .points,
+    .points.two-columns { grid-template-columns: 1fr; margin: 30px 0; }
+    .points p { padding: 16px; }
+    .text-screen { min-height: auto; padding: 90px 18px; }
+    .media-screen { min-height: 75svh; }
+    .video-title { align-self: flex-end; margin: 0 auto; padding-bottom: 90px; text-align: center; }
+    .video-title .description { margin-right: auto; margin-left: auto; }
+    .stores { flex-direction: column; }
+    .stores a { min-width: min(100%, 300px); }
+    .sound { right: 16px; bottom: 16px; }
+  }
+
+  @media (prefers-reduced-motion: reduce) {
+    html,
+    main { scroll-behavior: auto; }
+  }
+</style>
